@@ -1,7 +1,6 @@
 pub mod client_messages;
 pub mod server_messages;
 
-
 use num_enum::TryFromPrimitive;
 
 #[derive(Debug, Eq, PartialEq, TryFromPrimitive)]
@@ -10,7 +9,7 @@ use num_enum::TryFromPrimitive;
 pub enum AuthMethod {
     NoAuth = 0x00,
     // not supported at the moment
-    //gssapi = 0x01, 
+    //gssapi = 0x01,
     UsernamePassword = 0x02,
     Unknown = 0xff,
 }

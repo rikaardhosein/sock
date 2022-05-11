@@ -107,24 +107,31 @@ impl ClientHandler {
         }
         let mut target_host = target_host.unwrap();
         let mut target_host_read = target_host.try_clone();
-        if target_host_read.is_err() {return;}
+        if target_host_read.is_err() {
+            return;
+        }
         let mut target_host_read = target_host_read.unwrap();
         let mut client_write = self.stream.try_clone();
-        if client_write.is_err() {return;}
+        if client_write.is_err() {
+            return;
+        }
         let mut client_write = client_write.unwrap();
 
         thread::spawn(move || {
-
             let mut buf: VecDeque<u8> = VecDeque::with_capacity(16384);
 
             loop {
                 let mut tmpbuf: [u8; 4096] = [0; 4096];
                 let read_result = target_host_read.read(&mut tmpbuf);
-                if read_result.is_err() { return; }
+                if read_result.is_err() {
+                    return;
+                }
 
                 let bytes_read = read_result.unwrap();
 
-                if bytes_read == 0 { return; }
+                if bytes_read == 0 {
+                    return;
+                }
 
                 buf.extend(&tmpbuf[..bytes_read]);
                 buf.make_contiguous();
@@ -137,7 +144,6 @@ impl ClientHandler {
                     let bytes_written = write_result.unwrap();
                     buf.drain(..bytes_written);
                 }
-
             }
         });
 
@@ -182,7 +188,9 @@ impl Socks5Server {
                 let mut ct = ClientHandler {
                     stream: client_stream,
                 };
-                thread::spawn(move || {ct.handle();});
+                thread::spawn(move || {
+                    ct.handle();
+                });
                 //self.client_threads.push(ct);
             }
         }

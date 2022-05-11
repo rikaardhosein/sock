@@ -1,9 +1,9 @@
-use crate::socklib::{ProtocolVersion, AuthMethod};
+use crate::socklib::{AuthMethod, ProtocolVersion};
 
 #[derive(Debug)]
 pub struct VersionMethod {
     pub ver: ProtocolVersion,
-    pub method: AuthMethod
+    pub method: AuthMethod,
 }
 
 impl VersionMethod {

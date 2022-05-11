@@ -10,12 +10,13 @@ pub struct VersionMethod {
 }
 
 impl ClientMessage for VersionMethod {
-
-    fn try_parse<'a>(byte_iter: &mut impl Iterator<Item=&'a u8>) -> Option<VersionMethod> {
+    fn try_parse<'a>(byte_iter: &mut impl Iterator<Item = &'a u8>) -> Option<VersionMethod> {
         let version_byte = *byte_iter.next()?;
         let nmethods = *byte_iter.next()?;
         let methods: Vec<&u8> = byte_iter.take(nmethods as usize).collect::<Vec<&u8>>();
-        if methods.len() != nmethods as usize {return None;}
+        if methods.len() != nmethods as usize {
+            return None;
+        }
 
         let version = ProtocolVersion::try_from(version_byte).unwrap_or(ProtocolVersion::Unknown);
         let methods: Vec<AuthMethod> = methods
@@ -29,8 +30,6 @@ impl ClientMessage for VersionMethod {
             methods: methods,
         });
     }
-
-
 
     fn size(&self) -> usize {
         return (2 + self.nmethods) as usize;
