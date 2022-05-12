@@ -2,7 +2,7 @@ pub mod request;
 pub mod username_password_auth;
 pub mod version_method;
 
-pub struct VersionMethod;
+pub use crate::socklib::client_messages::{version_method::VersionMethod, request::ClientRequest};
 
 pub trait ClientMessage
 where

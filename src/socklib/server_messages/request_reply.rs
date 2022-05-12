@@ -34,9 +34,6 @@ impl RequestReply {
     pub fn serialize(&self) -> Vec<u8> {
         let mut res = Vec::new();
 
-        // We don't support anything else at the moment
-        assert!(self.atyp == AddressType::IPv4);
-
         let port = self.bind_port.to_be_bytes();
         let bind_addr = self.ipv4_bind_addr.octets();
 
