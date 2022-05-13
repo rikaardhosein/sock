@@ -7,3 +7,7 @@ edition = "2021"
 
 [dependencies]
 num_enum = "0.5.7"
+log4rs = "1.1.1"
+log = "0.4.17"
+clap = {version = "3.1.18", features = ["derive"]}
+
